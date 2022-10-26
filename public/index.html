@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="cargaPersonas()">
+    <div id="tabla"></div>
+</body>
+<script>
+    function cargaPersonas() {
+        fetch("/personas").then(
+            res => res.json()).then(
+            res => {
+                let html = "<table><tr><th>Nombre</th><th>Apellido</th><th>Edad</th></tr>"
+                res.forEach((persona, i) => {
+                    html += `<tr><td>${persona.nombre}</td><td>${persona.apellido}</td><td>${persona.edad}</td></tr>`
+                })
+                html += "</table>"
+
+                document.getElementById("tabla").innerHTML = html
+            }
+        )
+    }
+</script>
+</html>
